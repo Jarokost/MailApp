@@ -1,8 +1,8 @@
 module com.example.mailapp {
-    requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.controls;
+    requires javafx.graphics;
 
-
-    opens com.example.mailapp to javafx.fxml;
-    exports com.example.mailapp;
+    opens com.example.mailapp;
+    opens com.example.mailapp.view;
 }
