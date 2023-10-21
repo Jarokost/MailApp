@@ -5,4 +5,5 @@ module com.example.mailapp {
 
     opens com.example.mailapp;
     opens com.example.mailapp.view;
+    opens com.example.mailapp.controller;
 }

@@ -1,4 +1,4 @@
-package com.example.mailapp.view;
+package com.example.mailapp.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
