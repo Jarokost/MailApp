@@ -1,5 +1,6 @@
 package com.example.mailapp;
 
+import com.example.mailapp.view.ViewFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,10 +18,9 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/MainWindow.fxml")));
-        Scene scene = new Scene(parent);
-        stage.setTitle("MailApp");
-        stage.setScene(scene);
-        stage.show();
+
+        ViewFactory viewFactory = new ViewFactory(new EmailManager());
+        viewFactory.showLoginWindow();
+
     }
 }

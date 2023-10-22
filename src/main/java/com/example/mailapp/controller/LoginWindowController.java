@@ -1,12 +1,13 @@
 package com.example.mailapp.controller;
 
+import com.example.mailapp.EmailManager;
+import com.example.mailapp.view.ViewFactory;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
-public class LoginWindowController {
+public class LoginWindowController extends BaseController {
 
     @FXML
     private TextField emailAddressField;
@@ -16,6 +17,10 @@ public class LoginWindowController {
 
     @FXML
     private PasswordField passwordField;
+
+    public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
+        super(emailManager, viewFactory, fxmlName);
+    }
 
     @FXML
     void loginButtonAction() {
