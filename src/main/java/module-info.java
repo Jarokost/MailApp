@@ -3,6 +3,8 @@ module com.example.mailapp {
     requires javafx.controls;
     requires javafx.graphics;
     requires javafx.web;
+    requires activation;
+    requires javax.mail.api;
 
     opens com.example.mailapp;
     opens com.example.mailapp.view;
