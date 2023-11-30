@@ -6,12 +6,13 @@ import com.example.mailapp.controller.services.LoginService;
 import com.example.mailapp.model.EmailAccount;
 import com.example.mailapp.view.ViewFactory;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
-public class LoginWindowController extends BaseController {
+public class LoginWindowController extends BaseController implements Initializable {
 
     @FXML
     private TextField emailAddressField;
@@ -32,17 +33,27 @@ public class LoginWindowController extends BaseController {
         if(fieldsAreValid()) {
             EmailAccount emailAccount = new EmailAccount(emailAddressField.getText(), passwordField.getText());
             LoginService loginService = new LoginService(emailAccount, emailManager);
-            EmailLoginResult emailLoginResult = loginService.login();
+            loginService.start();
+            loginService.setOnSucceeded(event -> {
+                EmailLoginResult emailLoginResult = loginService.getValue();
 
-            switch (emailLoginResult) {
-                case SUCCESS:
-                    System.out.println("login successful!!! " + emailAccount);
-            }
+                switch (emailLoginResult) {
+                    case SUCCESS:
+                        System.out.println("login successful!!! " + emailAccount);
+                        viewFactory.showMainWindow();
+                        Stage stage = (Stage) errorLabel.getScene().getWindow();
+                        viewFactory.closeStage(stage);
+                        return;
+                    case FAILED_BY_CREDENTIALS:
+                        errorLabel.setText("Invalid credentials");
+                        return;
+                    case FAILED_BY_UNEXPECTED_ERROR:
+                        errorLabel.setText("unexpected error!");
+                    default:
+                        return;
+                }
+            });
         }
-
-//        viewFactory.showMainWindow();
-//        Stage stage = (Stage) errorLabel.getScene().getWindow();
-//        viewFactory.closeStage(stage);
     }
 
     private boolean fieldsAreValid() {
@@ -57,4 +68,9 @@ public class LoginWindowController extends BaseController {
         return true;
     }
 
+    @java.lang.Override
+    public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
+        emailAddressField.setText("jarek.kostujak@wp.pl");
+        passwordField.setText("JSthdtIhssC7fNw");
+    }
 }
