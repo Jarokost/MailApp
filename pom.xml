@@ -14,21 +14,23 @@
 <junit.version>5.9.2</junit.version>  </properties>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17.0.6</version>
+      <version>21</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17.0.6</version>
+      <version>21</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-web -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-web</artifactId>
-      <version>17.0.8</version>
+      <version>21</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
     <dependency>
