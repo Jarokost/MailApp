@@ -29,20 +29,21 @@ public class FetchFolderService extends Service<Void> {
         };
     }
 
-    private void fetchFolders() {
+    private void fetchFolders() throws MessagingException {
         Folder[] folders = new Folder[0];
-        try {
-            folders = store.getDefaultFolder().list();
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+        folders = store.getDefaultFolder().list();
         handleFolders(folders, foldersRoot);
     }
 
-    private void handleFolders(Folder[] folders, EmailTreeItem<String> foldersRoot) {
-        for(Folder folder: folders){
+    private void handleFolders(Folder[] folders, EmailTreeItem<String> foldersRoot) throws MessagingException {
+        for(Folder folder: folders) {
             EmailTreeItem<String> emailTreeItem = new EmailTreeItem<String>(folder.getName());
             foldersRoot.getChildren().add((emailTreeItem));
+            foldersRoot.setExpanded(true);
+            if(folder.getType() == 3) { // "3" for wp.pl means HOLDS_FOLDERS
+                Folder[] subFolders = folder.list();
+                handleFolders(subFolders, emailTreeItem);
+            }
         }
     }
 
