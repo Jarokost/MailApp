@@ -1,4 +1,4 @@
-package com.example.mailapp.controller.services;
+package com.example.mailapp.controller;
 
 public enum EmailLoginResult {
     SUCCESS,

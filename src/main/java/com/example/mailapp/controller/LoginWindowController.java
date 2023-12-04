@@ -1,7 +1,6 @@
 package com.example.mailapp.controller;
 
 import com.example.mailapp.EmailManager;
-import com.example.mailapp.controller.services.EmailLoginResult;
 import com.example.mailapp.controller.services.LoginService;
 import com.example.mailapp.model.EmailAccount;
 import com.example.mailapp.view.ViewFactory;

@@ -1,6 +1,7 @@
 package com.example.mailapp.controller.services;
 
 import com.example.mailapp.EmailManager;
+import com.example.mailapp.controller.EmailLoginResult;
 import com.example.mailapp.model.EmailAccount;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
