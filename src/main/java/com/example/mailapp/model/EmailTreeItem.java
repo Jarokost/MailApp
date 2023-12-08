@@ -9,6 +9,7 @@ import javax.mail.Flags;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Arrays;
 
 public class EmailTreeItem<String> extends TreeItem<String> {
 
@@ -24,10 +25,19 @@ public class EmailTreeItem<String> extends TreeItem<String> {
 
     public void addEmail(Message message) throws MessagingException {
         boolean messageIsRead = message.getFlags().contains(Flags.Flag.SEEN);
+        Address[] recipients = message.getAllRecipients();
+        java.lang.String recipient;
+        if(recipients.length == 0) {
+            recipient = (java.lang.String) this.name;
+        } else {
+            recipient = recipients[0].toString();
+        }
+
         EmailMessage emailMessage = new EmailMessage(
                 message.getSubject(),
                 message.getFrom()[0].toString(),
-                message.getRecipients(MimeMessage.RecipientType.TO)[0].toString(),
+                //message.getRecipients(MimeMessage.RecipientType.TO)[0].toString(),
+                recipient,
                 message.getSize(),
                 message.getSentDate(),
                 messageIsRead,
