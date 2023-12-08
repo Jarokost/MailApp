@@ -23,6 +23,10 @@ public class EmailTreeItem<String> extends TreeItem<String> {
         this.emailMessages = FXCollections.observableArrayList();
     }
 
+    public ObservableList<EmailMessage> getEmailMessages(){
+        return emailMessages;
+    }
+
     public void addEmail(Message message) throws MessagingException {
         boolean messageIsRead = message.getFlags().contains(Flags.Flag.SEEN);
         Address[] recipients = message.getAllRecipients();
@@ -32,12 +36,13 @@ public class EmailTreeItem<String> extends TreeItem<String> {
         } else {
             recipient = recipients[0].toString();
         }
-
+        java.lang.String sender = message.getFrom()[0].toString();
+        java.lang.String[] senderSplit = sender.split("\\s+");
+        sender = senderSplit[1];
         EmailMessage emailMessage = new EmailMessage(
                 message.getSubject(),
-                message.getFrom()[0].toString(),
-                //message.getRecipients(MimeMessage.RecipientType.TO)[0].toString(),
-                recipient,
+                sender, //message.getFrom()[0].toString(),
+                recipient, //message.getRecipients(MimeMessage.RecipientType.TO)[0].toString(),
                 message.getSize(),
                 message.getSentDate(),
                 messageIsRead,
