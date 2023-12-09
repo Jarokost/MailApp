@@ -38,6 +38,11 @@ public class MessageRendererService extends Service {
         return new Task() {
             @Override
             protected Object call() throws Exception {
+                try {
+                    loadMessage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return null;
             }
         };

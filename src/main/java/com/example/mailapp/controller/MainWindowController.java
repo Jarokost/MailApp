@@ -2,6 +2,7 @@ package com.example.mailapp.controller;
 
 
 import com.example.mailapp.EmailManager;
+import com.example.mailapp.controller.services.MessageRendererService;
 import com.example.mailapp.model.EmailMessage;
 import com.example.mailapp.model.EmailTreeItem;
 import com.example.mailapp.model.SizeInteger;
@@ -47,6 +48,8 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private TreeView<String> emailsTreeView;
 
+    private MessageRendererService messageRendererService;
+
     public MainWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
         super(emailManager, viewFactory, fxmlName);
     }
@@ -67,6 +70,8 @@ public class MainWindowController extends BaseController implements Initializabl
         setUpEmailsTableView();
         setUpFolderSelection();
         setUpBoldRows();
+        setUpMessageRendererService();
+        setUpMessageSelection();
     }
 
     private void setUpEmailsTreeView() {
@@ -107,6 +112,20 @@ public class MainWindowController extends BaseController implements Initializabl
                         }
                     }
                 };
+            }
+        });
+    }
+
+    private void setUpMessageRendererService() {
+        messageRendererService = new MessageRendererService(emailWebView.getEngine());
+    }
+
+    private void setUpMessageSelection() {
+        emailsTableView.setOnMouseClicked(e->{
+            EmailMessage emailMessage = emailsTableView.getSelectionModel().getSelectedItem();
+            if(emailMessage != null) {
+                messageRendererService.setEmailMessage(emailMessage);
+                messageRendererService.restart();
             }
         });
     }
