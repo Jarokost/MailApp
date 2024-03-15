@@ -47,4 +47,9 @@ public class EmailAccount {
         properties.put("mail.smtps.auth", "true");
         properties.put("outgoingHost", "smtp.wp.pl");
     }
+
+    @Override
+    public String toString() {
+        return address;
+    }
 }

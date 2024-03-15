@@ -5,6 +5,8 @@ import com.example.mailapp.controller.services.FolderUpdaterService;
 import com.example.mailapp.model.EmailAccount;
 import com.example.mailapp.model.EmailMessage;
 import com.example.mailapp.model.EmailTreeItem;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -15,6 +17,12 @@ public class EmailManager {
 
     private EmailMessage selectedMessage;
     private EmailTreeItem<String> selectedFolder;
+    private ObservableList<EmailAccount> emailAccounts = FXCollections.observableArrayList();
+
+    public ObservableList<EmailAccount> getEmailAccounts() {
+        return emailAccounts;
+    }
+
     private FolderUpdaterService folderUpdaterService;
     //Folder handling:
     private EmailTreeItem<String> foldersRoot = new EmailTreeItem<String>("");
@@ -34,6 +42,7 @@ public class EmailManager {
     }
 
     public void addEmailAccount(EmailAccount emailAccount) {
+        emailAccounts.add(emailAccount);
         EmailTreeItem<String> treeItem = new EmailTreeItem<String>(emailAccount.getAddress());
         FetchFolderService fetchFolderService = new FetchFolderService(emailAccount.getStore(), treeItem, folderList);
         fetchFolderService.start();
