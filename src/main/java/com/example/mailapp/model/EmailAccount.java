@@ -1,5 +1,6 @@
 package com.example.mailapp.model;
 
+import javax.mail.Session;
 import javax.mail.Store;
 import javax.xml.xpath.XPathEvaluationResult;
 import java.util.Properties;
@@ -10,6 +11,7 @@ public class EmailAccount {
     private String password;
     private Properties properties;
     private Store store;
+    private Session session;
 
     public String getAddress() {
         return address;
@@ -46,5 +48,18 @@ public class EmailAccount {
         properties.put("mail.smtps.host", "smtp.wp.pl");
         properties.put("mail.smtps.auth", "true");
         properties.put("outgoingHost", "smtp.wp.pl");
+    }
+
+    @Override
+    public String toString() {
+        return address;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

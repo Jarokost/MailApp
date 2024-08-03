@@ -30,13 +30,13 @@ public class EmailTreeItem<String> extends TreeItem<String> {
     public void addEmail(Message message) throws MessagingException {
         EmailMessage emailMessage = fetchMessage(message);
         emailMessages.add(emailMessage);
-        System.out.println("added to: " + name + " " + message.getSubject());
+        System.out.println("added to: " + name ); //+ " " + message.getSubject()
     }
 
     public void addEmailToTop(Message message) throws MessagingException {
         EmailMessage emailMessage = fetchMessage(message);
         emailMessages.add(0, emailMessage);
-        System.out.println("added to: " + name + " " + message.getSubject());
+        System.out.println("added to: " + name ); //+ " " + message.getSubject()
     }
 
     private EmailMessage fetchMessage(Message message) throws MessagingException {
@@ -49,8 +49,12 @@ public class EmailTreeItem<String> extends TreeItem<String> {
             recipient = recipients[0].toString();
         }
         java.lang.String sender = message.getFrom()[0].toString();
-        java.lang.String[] senderSplit = sender.split("\\s+");
-        sender = senderSplit[1];
+        java.lang.String[] senderSplit = sender.split("\s+");
+        if(senderSplit.length < 2){
+            sender = senderSplit[0];
+        } else {
+            sender = senderSplit[1];
+        }
         EmailMessage emailMessage = new EmailMessage(
                 message.getSubject(),
                 sender, //message.getFrom()[0].toString(),
