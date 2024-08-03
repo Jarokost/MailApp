@@ -39,6 +39,7 @@ public class EmailSenderService extends Service<EmailSendingResult> {
                     Multipart multipart = new MimeMultipart();
                     BodyPart messageBodyPart = new MimeBodyPart();
                     messageBodyPart.setContent(content, "text/html");
+                    multipart.addBodyPart(messageBodyPart);
                     mimeMessage.setContent(multipart);
                     //Sending the message
                     Transport transport = emailAccount.getSession().getTransport();

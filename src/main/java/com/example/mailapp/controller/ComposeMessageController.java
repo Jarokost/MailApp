@@ -50,10 +50,10 @@ public class ComposeMessageController extends BaseController implements Initiali
                     viewFactory.closeStage(stage);
                     break;
                 case FAILED_BY_PROVIDER:
-                    errorLabel.setText("Provider eror!");
+                    errorLabel.setText("Provider error!");
                     break;
                 case FAILED_BY_UNEXPECTED_ERROR:
-                    errorLabel.setText("Unexpected eror!");
+                    errorLabel.setText("Unexpected error!");
                     break;
 
             }
