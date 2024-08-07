@@ -15,6 +15,8 @@ import javafx.scene.web.WebView;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
+import java.awt.*;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -85,6 +87,7 @@ public class EmailDetailsController extends BaseController implements Initializa
         }
 
         private void downloadAttachment(){
+            colorBlue();
             Service service = new Service() {
                 @Override
                 protected Task createTask() {
@@ -98,6 +101,27 @@ public class EmailDetailsController extends BaseController implements Initializa
                 }
             };
             service.restart();
+            service.setOnSucceeded(e -> {
+                colorGreen();
+                this.setOnAction(e2 ->{
+                    File file = new File(downloadedFilePath);
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()) {
+                        try {
+                            desktop.open(file);
+                        } catch (Exception exp) {
+                            exp.printStackTrace();
+                        }
+                    }
+                });
+            });
+        }
+
+        private void colorBlue(){
+            this.setStyle("-fx-background-color: Blue");
+        }
+        private void colorGreen(){
+            this.setStyle("-fx-background-color: Green");
         }
 
     }
