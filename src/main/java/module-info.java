@@ -5,6 +5,7 @@ module com.example.mailapp {
     requires javafx.web;
     requires activation;
     requires javax.mail.api;
+    requires java.desktop;
 
     opens com.example.mailapp;
     opens com.example.mailapp.view;
