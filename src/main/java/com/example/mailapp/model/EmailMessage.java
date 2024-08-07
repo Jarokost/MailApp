@@ -5,7 +5,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import javax.mail.Message;
+import javax.mail.internet.MimeBodyPart;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class EmailMessage {
 
@@ -16,6 +19,8 @@ public class EmailMessage {
     private SimpleObjectProperty<Date> date;
     private boolean isRead;
     private Message message;
+    private List<MimeBodyPart> attachementList = new ArrayList<MimeBodyPart>();
+    private boolean hasAttachments = false;
 
     public EmailMessage(String subject, String sender, String recipient, int size, Date date, boolean isRead, Message message) {
         this.subject = new SimpleStringProperty(subject);
@@ -26,6 +31,8 @@ public class EmailMessage {
         this.isRead = isRead;
         this.message = message;
     }
+
+
 
     public String getSubject() {
         return this.subject.get();
@@ -57,5 +64,16 @@ public class EmailMessage {
 
     public Message getMessage() {
         return this.message;
+    }
+
+    public void addAttachement(MimeBodyPart mbp) {
+        hasAttachments = true;
+        attachementList.add(mbp);
+        try
+        {
+            System.out.println("Added attach: " + mbp.getFileName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
