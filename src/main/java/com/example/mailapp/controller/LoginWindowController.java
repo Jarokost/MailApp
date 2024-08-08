@@ -71,7 +71,6 @@ public class LoginWindowController extends BaseController implements Initializab
 
     @java.lang.Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
-        emailAddressField.setText("jarek.kostujak@wp.pl");
-        passwordField.setText("JSthdtIhssC7fNw");
+
     }
 }
