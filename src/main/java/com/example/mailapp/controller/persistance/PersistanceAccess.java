@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PersistanceAccess {
 
-    private String VALID_ACCOUNT_LOCATION = System.getenv("APPDATA") + "\\validAccounts.ser";
+    private String VALID_ACCOUNT_LOCATION = System.getProperty("user.home") + File.separator + "validAccounts.ser";
 
     public List<ValidAccount> loadFromPersistance(){
         List<ValidAccount> resultList = new ArrayList<ValidAccount>();

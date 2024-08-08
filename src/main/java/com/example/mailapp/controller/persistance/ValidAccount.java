@@ -7,7 +7,7 @@ public class ValidAccount implements Serializable {
     private String address;
     private String password;
 
-    ValidAccount(String address, String password) {
+    public ValidAccount(String address, String password) {
         this.address = address;
         this.password = password;
     }
